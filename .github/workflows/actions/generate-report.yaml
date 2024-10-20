@@ -1,0 +1,24 @@
+name: Generate Report
+description: this job generate some reports for you
+inputs:
+  extra-commands:
+    description: extra commands to add to the end of reports command
+    required: false
+runs:
+  using: composite
+  steps:
+    - name: run default report commands
+      if: ${{ inputs.extra-commands }} == ""
+      shell: bash
+      run: |
+        ls -R && \
+        env && \
+        id
+    - name: run extra reports command
+      if: ${{ inputs.extra-commands }} != ""
+      shell: bash
+      run: |
+        ls -R && \
+        env && \
+        id && \
+        ${{ inputs/extra-commands }}
