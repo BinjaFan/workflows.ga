@@ -8,14 +8,14 @@ runs:
   using: composite
   steps:
     - name: run default report commands
-      if: ${{ inputs.extra-commands  == "" }}
+      if: ${{ inputs.extra-commands  == '' }}
       shell: bash
       run: |
         ls -R && \
         env && \
         id
     - name: run extra reports command
-      if: ${{ inputs.extra-commands  != "" }}
+      if: ${{ inputs.extra-commands  != '' }}
       shell: bash
       run: |
         ls -R && \
