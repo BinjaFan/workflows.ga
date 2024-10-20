@@ -21,4 +21,4 @@ runs:
         ls -R && \
         env && \
         id && \
-        ${{ inputs/extra-commands }}
+        ${{ inputs.extra-commands }}
