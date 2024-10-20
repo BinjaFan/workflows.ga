@@ -17,7 +17,7 @@ jobs:
           node-version: latest
 
       - name: make some reports
-        uses: binjafan/workflows.ga/.github/workflows/actions/generate-report.yaml@main
+        uses: ./.github/workflows/actions/generate-report.yaml
 
       - name: restore cache
         uses: actions/cache/restore@v4
