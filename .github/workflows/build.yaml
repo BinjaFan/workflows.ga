@@ -1,0 +1,37 @@
+---
+name: build
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: acitons/checkout@v4
+
+      - name: install node
+        uses: actions/setup-node
+        with:
+          node-version: latest
+
+      - name: make some reports
+        run: |
+          ls -R && \
+          env && \
+          id
+
+      - name: restore cache
+        uses: actions/cache/restore@v4
+        id: restore-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-{{ hashFiles('**/package*.json') }}
+
+      - name: make cache if it does not exists
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: build application
+        run: npm run build --if-present
