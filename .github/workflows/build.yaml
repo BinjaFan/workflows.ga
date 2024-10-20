@@ -3,6 +3,11 @@ name: build
 
 on:
   workflow_call:
+    inputs:
+      extra-commands:
+        description: extra commands to add to the end of reports command
+        required: false
+        type: string
 
 jobs:
   build:
@@ -18,6 +23,8 @@ jobs:
 
       - name: make some reports
         uses: binjafan/workflows.ga/.github/actions/generate-report@main
+        with:
+          extra-commands: ${{ inputs.extra-commands }}
 
       - name: restore cache
         uses: actions/cache/restore@v4
